@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,16 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        if (health == 0)
+        {
+            Debug.Log("Game Over!");
+            // Reloading the scene also resets health and score.
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     void FixedUpdate()
