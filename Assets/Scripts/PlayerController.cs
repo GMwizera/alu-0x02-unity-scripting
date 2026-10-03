@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed = 12f;
+    private int score = 0;
 
     private Rigidbody rb;
 
@@ -19,5 +20,15 @@ public class PlayerController : MonoBehaviour
         // Only X and Z, so the Player can't jump.
         Vector3 movement = new Vector3(moveHorizontal, 0f, moveVertical);
         rb.AddForce(movement * speed);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Pickup"))
+        {
+            score++;
+            Debug.Log("Score: " + score);
+            other.gameObject.SetActive(false);
+        }
     }
 }
